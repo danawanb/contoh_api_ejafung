@@ -60,7 +60,10 @@
           "id_jenjang",
           "ak_knv",
           "ak_total",
-          "api_key"
+          "api_key",
+          "tanggal_mulai",
+          "tanggal_selesai",
+          "jumlah_bulan"
         ],
         "properties": {
           "nip": {
