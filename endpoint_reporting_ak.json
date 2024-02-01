@@ -1,0 +1,94 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Contoh Dokumentasi Interkoneksi eJafung",
+    "version": "1.0.0"
+  },
+  "webhooks": {
+    "kirim_ak/{kdkl}": {
+      "post": {
+        "requestBody": {
+          "description": "Contoh Data yang dikirim ke endpoint",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/angka_kredit"
+              },
+              "example": {
+                "nip": "19970606206121002",
+                "id_jenjang": 5,
+                "ak_knv": "2.5",
+                "ak_total": "20",
+                "tanggal_mulai": "01-01-2024",
+                "tanggal_selesai": "31-06-2024",
+                "jumlah_bulan": 6,
+                "api_key": "xxxxxxxx"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "kdkl",
+            "in": "query",
+            "description": "Kode KL dengan jumlah digit 3",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 3
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "Berhasil Kirim Angka Kredit ke eJafung Kemenkeu"
+          },
+          "400" : {
+            "description": "Terdapat Kesalahan Validasi : xxxxx"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "angka_kredit": {
+        "required": [
+          "nip",
+          "id_jenjang",
+          "ak_knv",
+          "ak_total",
+          "api_key"
+        ],
+        "properties": {
+          "nip": {
+            "type": "string"
+          },
+          "id_jenjang": {
+            "type": "integer"
+          },
+          "ak_knv": {
+            "type": "string"
+          },
+          "ak_total": {
+            "type": "string"
+          },
+          "tanggal_mulai": {
+            "type": "string"
+          },
+          "tanggal_selesai": {
+            "type": "string"
+          },
+          "jumlah_bulan": {
+            "type" : "integer"
+          },
+          "api_key" : {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
