@@ -63,7 +63,8 @@
           "api_key",
           "tanggal_mulai",
           "tanggal_selesai",
-          "jumlah_bulan"
+          "jumlah_bulan",
+          "komponen_lain"
         ],
         "properties": {
           "nip": {
@@ -89,6 +90,9 @@
           },
           "api_key" : {
             "type": "string"
+          },
+          "komponen_lain" : {
+            "type" : "string"
           }
         }
       }
