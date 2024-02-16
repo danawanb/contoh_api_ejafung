@@ -23,7 +23,12 @@
             "name": "token",
             "in": "path",
             "description": "Token",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 20,
+              "maxLength": 35
+            }
           }
         ],
         "responses": {
