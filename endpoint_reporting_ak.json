@@ -5,16 +5,8 @@
     "version": "1.0.0"
   },
   "webhooks": {
-    "profil/{nip}": {
+    "profil/{nip}/{token}": {
       "get": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-              }
-            }
-          }
-        },
         "parameters": [
           {
             "name": "nip",
@@ -26,6 +18,12 @@
               "minLength": 20,
               "maxLength": 20
             }
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "Token",
+            "required": true
           }
         ],
         "responses": {
