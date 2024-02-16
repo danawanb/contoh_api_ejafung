@@ -5,7 +5,54 @@
     "version": "1.0.0"
   },
   "webhooks": {
-    "kirim_ak/{kdkl}": {
+    "profil/{nip}": {
+      "get": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nip",
+            "in": "path",
+            "description": "Parameter NIP Pegawai tsb",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 20,
+              "maxLength": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Berhasil",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/profil"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description": "Terdapat kesalahan atau profil JF tidak aktif",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Terdapat kesalahan atau profil JF tidak aktif"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "kirim_ak": {
       "post": {
         "requestBody": {
           "description": "Contoh Data yang dikirim ke endpoint",
@@ -20,34 +67,34 @@
                 "id_jenjang": 5,
                 "ak_knv": "2.5",
                 "ak_total": "20",
-                "is_skp_pendidikan": 0,
-                "tanggal_mulai": "01-01-2024",
-                "tanggal_selesai": "31-06-2024",
-                "jumlah_bulan": 6,
-                "api_key": "xxxxxxxxx"
+                "is_skp_pendidikan": 1,
+                "id_skp_pendidikan" : 5,
+                "tahun": "2024",
+                "token": "xxxxxxxxx"
               }
             }
           }
         },
-        "parameters": [
-          {
-            "name": "kdkl",
-            "in": "query",
-            "description": "Kode KL dengan jumlah digit 3",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 3,
-              "maxLength": 3
-            }
-          }
-        ],
         "responses": {
           "200":{
-            "description": "Berhasil Kirim Angka Kredit ke eJafung Kemenkeu"
+            "description": "Berhasil Kirim Angka Kredit ke eJafung Kemenkeu",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Pelaporan Angka Kredit telah berhasil dikirim ke eJafung"
+                }
+              }
+            }
           },
           "400" : {
-            "description": "Terdapat Kesalahan Validasi : xxxxx"
+            "description": "Terdapat Kesalahan Validasi",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Terdapat kesalahan validasi"
+                }
+              }
+            }
           }
         }
       }
@@ -61,10 +108,8 @@
           "id_jenjang",
           "ak_knv",
           "ak_total",
-          "api_key",
-          "tanggal_mulai",
-          "tanggal_selesai",
-          "jumlah_bulan",
+          "token",
+          "tahun",
           "komponen_lain"
         ],
         "properties": {
@@ -80,23 +125,36 @@
           "ak_total": {
             "type": "string"
           },
-          "tanggal_mulai": {
+          "tahun": {
             "type": "string"
           },
-          "tanggal_selesai": {
-            "type": "string"
-          },
-          "jumlah_bulan": {
-            "type" : "integer"
-          },
-          "api_key" : {
+          "token" : {
             "type": "string"
           },
           "is_skp_pendidikan": {
             "type": "integer"
           },
+          "id_skp_pendidikan" : {
+            "type" : "integer"
+          },
           "komponen_lain" : {
             "type" : "string"
+          }
+        }
+      },
+      "profil" : {
+        "properties": {
+          "nip": {
+            "type": "string"
+          },
+          "nama": {
+            "type": "string"
+          },
+          "id_jenjang": {
+            "type": "string"
+          },
+          "id_didik" : {
+            "type": "integer"
           }
         }
       }
