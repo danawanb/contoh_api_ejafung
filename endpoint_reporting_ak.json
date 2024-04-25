@@ -70,7 +70,7 @@
                 "id_jenjang": 5,
                 "ak_knv": "2.5",
                 "ak_total": "20",
-                "is_skp_pendidikan": 1,
+                "is_skp_pendidikan": true,
                 "id_skp_pendidikan" : 5,
                 "tahun": "2024",
                 "token": "xxxxxxxxx"
@@ -135,7 +135,7 @@
             "type": "string"
           },
           "is_skp_pendidikan": {
-            "type": "integer"
+            "type": "boolean"
           },
           "id_skp_pendidikan" : {
             "type" : "integer"
