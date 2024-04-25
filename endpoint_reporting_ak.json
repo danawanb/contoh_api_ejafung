@@ -154,7 +154,7 @@
             "type": "string"
           },
           "id_jenjang": {
-            "type": "string"
+            "type": "integer"
           },
           "id_didik" : {
             "type": "integer"
