@@ -26,8 +26,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "minLength": 20,
-              "maxLength": 35
+              "minLength": 16,
+              "maxLength": 16
             }
           }
         ],
