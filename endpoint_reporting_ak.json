@@ -58,7 +58,8 @@
     "kirim_ak": {
       "post": {
         "requestBody": {
-          "description": "Contoh Data yang dikirim ke endpoint",
+          "summary": "Contoh Data yang dikirim ke endpoint",
+          "description": "Id pendidikan D3= 4, Id pendidikan S1/D4=5, Id pendidikan S2=6, dan Id pendidikan S3 =7",
           "required": true,
           "content": {
             "application/json": {
