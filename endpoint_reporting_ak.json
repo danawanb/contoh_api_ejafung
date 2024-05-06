@@ -56,6 +56,7 @@
       }
     },
     "iki_mandatory/{id_penugasan}": {
+      "summary":"id penugasa teridir dari 1= PPK, 2 =PPSPM, 3 =Bendahara Pengeluaran ",
       "get": {
         "parameters": [
           {
