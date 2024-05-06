@@ -2,12 +2,23 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Contoh Dokumentasi Interkoneksi eJafung",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": "Dokumentasi API ejafung untuk perekaman SKP, Pelaporan, ambil data profil, dan data Indikator Kinerja Mandatory"
   },
   "webhooks": {
-    "profil/{nip}/{token}": {
+    "profil/{nip}": {
       "get": {
         "parameters": [
+          {
+            "name": "X-Request-eJafung",
+            "in": "header",
+            "description": "Toke JWT dari eJafung",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "jwt"
+            }
+          },
           {
             "name": "nip",
             "in": "path",
@@ -17,17 +28,6 @@
               "type": "string",
               "minLength": 20,
               "maxLength": 20
-            }
-          },
-          {
-            "name": "token",
-            "in": "path",
-            "description": "Token",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minLength": 16,
-              "maxLength": 16
             }
           }
         ],
@@ -55,8 +55,69 @@
         }
       }
     },
+    "iki_mandatory/{id_penugasan}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "X-Request-eJafung",
+            "in": "header",
+            "description": "Token JWT dari eJafung",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "jwt"
+            }
+          },
+          {
+            "name": "id_penugasan",
+            "in": "path",
+            "description": "Parameter Id Penugasan yang akan diambil IKI mandatorynya",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 20,
+              "maxLength": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Berhasil Ambil Iki mandatory",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/iki_mandatory"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description": "Terdapat kesalahan token",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Terdapat kesalahan atau token tidak aktif"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "kirim_ak": {
       "post": {
+        "summary": "Kirim data angka kredit ke aplikasi eJafung",
+        "parameters" : [
+          {
+            "in" : "header",
+            "name": "X-Request-eJafung",
+            "schema" : {
+              "type" : "string",
+              "format" : "jwt"
+            },
+            "required": true
+          }
+        ],
         "requestBody": {
           "summary": "Contoh Data yang dikirim ke endpoint",
           "description": "Id pendidikan D3= 4, Id pendidikan S1/D4=5, Id pendidikan S2=6, dan Id pendidikan S3 =7",
@@ -68,13 +129,18 @@
               },
               "example": {
                 "nip": "19970606206121002",
-                "id_jenjang": 5,
-                "ak_knv": "2.5",
-                "ak_total": "20",
+                "id_jenjang": 1,
+                "ak_knv": "25",
+                "ak_total": "45",
                 "is_skp_pendidikan": true,
-                "id_skp_pendidikan" : 5,
                 "tahun": "2024",
-                "token": "xxxxxxxxx"
+                "data_didik": {
+                  "id_didik" : 6,
+                  "nm_jurusan" : "Ekonomi Pembangunan",
+                  "tgl_ijazah" : 1714987315,
+                  "nm_fakultas" : "Fakultas Ekonomi dan Bisnis",
+                  "nm_universitas" : "Universitas Trisakti"
+                }
               }
             }
           }
@@ -112,9 +178,8 @@
           "id_jenjang",
           "ak_knv",
           "ak_total",
-          "token",
           "tahun",
-          "komponen_lain"
+          "is_skp_pendidikan"
         ],
         "properties": {
           "nip": {
@@ -132,18 +197,36 @@
           "tahun": {
             "type": "string"
           },
-          "token" : {
-            "type": "string"
-          },
           "is_skp_pendidikan": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Bernilai true jika terdapat peningkatan pendidikan pada pelaporan angka kredit, jika tidak ada peningkatan pendidikan maka berikan nilai false"
           },
-          "id_skp_pendidikan" : {
-            "type" : "integer"
-          },
-          "komponen_lain" : {
-            "type" : "string"
+          "data_didik" : {
+            "type" : "object",
+            "properties": {
+              "id_didik" : {
+                "type" : "integer",
+                "description": "id didik atas perolehan peningkatan pendidikan Id pendidikan D3= 4, Id pendidikan S1/D4=5, Id pendidikan S2=6, dan Id pendidikan S3 =7 "
+              },
+              "nm_jurusan": {
+                "type": "string",
+                "description": "Nama Jurusan maksimal xx karakter"
+              },
+              "tgl_ijazah": {
+                "type": "integer",
+                "description": "Tanggal Ijazah dalam epoch time"
+              },
+              "nm_fakultas": {
+                "type": "string",
+                "description": "Nama Fakultas maksimal xx karakter"
+              },
+              "nm_universitas": {
+                "type": "string",
+                "description": "Nama Universitas maksimal xx karakter"
+              }
+            }
           }
+
         }
       },
       "profil" : {
@@ -161,6 +244,39 @@
             "type": "integer"
           }
         }
+      },
+      "iki_mandatory" : {
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "properties": {
+            "nm_penugasan" : {
+              "type" : "string",
+              "description" : "Berisi nama penugasan"
+            },
+            "nm_jenjang" : {
+              "type" : "string",
+              "description" : "Berisi Nama Jenjang JF PK APBN/APK APBN"
+            },
+            "id_jenjang" : {
+              "type" : "integer",
+              "description" : "id jenjang JF APK APBN/PK APBN , Ahli pertama = 1, Ahli Muda = 2, Ahli Madya = 3, Terampil = 5, Mahir = 6, Penyelia = 7"
+            },
+            "uraian" : {
+              "type" : "string",
+              "decription": "uraian Indikator Kinerja Individu Mandatory"
+            },
+            "target" : {
+              "type" : "string",
+              "description" : "target periodik iki mandatory: triwulanan, semesteran, atau tahunan. Default triwulanan"
+            },
+            "satuan" : {
+              "type": "string",
+              "description" : "satuan penilaian iki mandatory: Indeks atau Persentase"
+            }
+          }
+        }
+
       }
     }
   }
