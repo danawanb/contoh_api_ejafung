@@ -183,19 +183,24 @@
         ],
         "properties": {
           "nip": {
-            "type": "string"
+            "type": "string",
+            "decription":"nip pejabat fungsional"
           },
           "id_jenjang": {
-            "type": "integer"
+            "type": "integer",
+            "decription":"id jenjang pejabat fungsional"
           },
           "ak_knv": {
-            "type": "string"
+            "type": "string",
+            "description":"angka kredit yang diperoleh oleh pejabat fungsional di tahun pelaporan"
           },
           "ak_total": {
-            "type": "string"
+            "type": "string",
+            "description": "berisi angka kredit total yang diperoleh pejabat fungsional"
           },
           "tahun": {
-            "type": "string"
+            "type": "string",
+            "description":"berisi tahun pelaporan SKP contoh : 2024"
           },
           "is_skp_pendidikan": {
             "type": "boolean",
