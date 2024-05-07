@@ -229,6 +229,10 @@
               "nm_universitas": {
                 "type": "string",
                 "description": "Nama Universitas maksimal xx karakter"
+              },
+              "id_bidang" : {
+                "type" :"integer",
+                "description":"Id Bidang pendidikan, teridiri dari : 1=Ekonomi, 2=Keuangan, 3=Akuntansi, 4=Manajemen, 5=Administrasi, 6=Hukum, dan 7=Bidang Lainnya"
               }
             }
           }
@@ -244,10 +248,12 @@
             "type": "string"
           },
           "id_jenjang": {
-            "type": "integer"
+            "type": "integer",
+            "description" : "id_jenjang terdiri dari 1=Ahli Pertama, 2=Ahli Muda, 3=Ahli Madya, 5=Terampil, 6=Mahir, dan 7=Penyelia"
           },
           "id_didik" : {
-            "type": "integer"
+            "type": "integer",
+            "description" : "id_didik terdiri dari 3=SMA/D1/D2, 4=D3, 5=D4/S1, 6=S2, 7=S3"
           }
         }
       },
