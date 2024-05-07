@@ -12,7 +12,7 @@
           {
             "name": "X-Request-eJafung",
             "in": "header",
-            "description": "Toke JWT dari eJafung",
+            "description": "Token JWT dari eJafung",
             "required": true,
             "schema": {
               "type": "string",
@@ -56,7 +56,7 @@
       }
     },
     "iki_mandatory/{id_penugasan}": {
-      "summary":"id penugasa teridir dari 1= PPK, 2 =PPSPM, 3 =Bendahara Pengeluaran ",
+      "summary":"id penugasan terdiri dari 1= Pejabat Pembuat Komitmen, 2 =Pejabat Penandatangan SPM, 3 =Bendahara Pengeluaran, 4= Bendahara penerimaan, 5 = Bendahara Pengeluaran Pembantu, 6=Petugas Pengelola Administrasi Belanja Pegawai (PPABP), 7=Analis Laporan Keuangan, 8=Penyusun Laporan Keuangan",
       "get": {
         "parameters": [
           {
@@ -72,12 +72,10 @@
           {
             "name": "id_penugasan",
             "in": "path",
-            "description": "Parameter Id Penugasan yang akan diambil IKI mandatorynya",
+            "description": "Parameter Id Penugasan yang akan diambil IKI mandatorynya sesuai summay di atas",
             "required": true,
             "schema": {
               "type": "string",
-              "minLength": 20,
-              "maxLength": 20
             }
           }
         ],
@@ -140,7 +138,8 @@
                   "nm_jurusan" : "Ekonomi Pembangunan",
                   "tgl_ijazah" : 1714987315,
                   "nm_fakultas" : "Fakultas Ekonomi dan Bisnis",
-                  "nm_universitas" : "Universitas Trisakti"
+                  "nm_universitas" : "Universitas Trisakti",
+                  "id_bidang" : 1,
                 }
               }
             }
