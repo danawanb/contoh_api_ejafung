@@ -246,6 +246,18 @@
           "nama": {
             "type": "string"
           },
+          "kdgol": {
+            "type":"string",
+            "description":"Berisi Kode Golongan pada profil tersebut"
+          }
+          "kdsatker" :{
+            "type":"string",
+            "description":"Berisi kode satker kedudukan JF tersebut"
+          },
+          "id_jafung": {
+            "type" : "integer",
+            "description":"Berisi Id jafung, APK APBN = 3 dan PK APBN = 4"
+          }
           "id_jenjang": {
             "type": "integer",
             "description" : "id_jenjang terdiri dari 1=Ahli Pertama, 2=Ahli Muda, 3=Ahli Madya, 5=Terampil, 6=Mahir, dan 7=Penyelia"
